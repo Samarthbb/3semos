@@ -37,8 +37,8 @@ struct sockaddr_in addr = { .sin_family = AF_INET, .sin_port = htons(7891),
  bind(welcome, (struct sockaddr*)&addr, sizeof(addr));
  printf("Server is online, waiting for connections...\n");
  listen(welcome, 5);
-nt new_soc = accept(welcome, NULL, NULL);
- char fname[50], buffer
+int new_soc = accept(welcome, NULL, NULL);
+ char fname[50], buffer[1024];
  recv(new_soc, fname, sizeof(fname), 0);
  printf("Request received for file: %s\n", fname);
 int fd = open(fname, O_RDONLY);
@@ -56,4 +56,5 @@ int fd = open(fname, O_RDONLY);
  close(welcome);
  printf("Request completed.\n");
  return 0;
+
 }
